@@ -1,0 +1,45 @@
+# Revive configuration for remap
+
+ignoreGeneratedHeader = false
+severity = "warning"
+confidence = 0.8
+errorCode = 1
+warningCode = 1
+
+[rule.blank-imports]
+[rule.context-as-argument]
+[rule.context-keys-type]
+[rule.dot-imports]
+[rule.error-return]
+[rule.error-strings]
+[rule.error-naming]
+[rule.exported]
+[rule.if-return]
+[rule.increment-decrement]
+[rule.var-naming]
+[rule.var-declaration]
+[rule.package-comments]
+[rule.range]
+[rule.receiver-naming]
+[rule.time-naming]
+[rule.unexported-return]
+[rule.indent-error-flow]
+[rule.errorf]
+[rule.empty-block]
+[rule.superfluous-else]
+[rule.unused-parameter]
+[rule.unreachable-code]
+[rule.redefines-builtin-id]
+
+[rule.argument-limit]
+  arguments = [4]
+
+[rule.cyclomatic]
+  arguments = [10]
+
+[rule.max-public-structs]
+  arguments = [10]  # Increased limit for error hierarchy and replacement engine
+
+# Disable file-header rule as it's too strict for this project
+# [rule.file-header]
+#   arguments = ["// Package .* provides"]

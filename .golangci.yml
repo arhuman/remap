@@ -1,0 +1,64 @@
+# golangci-lint configuration for remap
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters-settings:
+  gocyclo:
+    min-complexity: 10
+  goconst:
+    min-len: 3
+    min-occurrences: 3
+  goimports:
+    local-prefixes: remap
+  golint:
+    min-confidence: 0.8
+  govet:
+    shadow: true
+  misspell:
+    locale: US
+  unused:
+    check-exported: false
+
+linters:
+  enable:
+    - gofmt
+    - goimports
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - gosimple
+    - ineffassign
+    - typecheck
+    - gosec
+    - gocyclo
+    - goconst
+    - misspell
+
+issues:
+  exclude-use-default: false
+  exclude:
+    # errcheck: Almost all programs ignore errors on these functions and in most cases it's ok
+    - Error return value of .((os\.)?std(out|err)\..*|.*Close|.*Flush|os\.Remove(All)?|.*printf?|os\.(Un)?Setenv). is not checked
+    # gosec: File operations with variable paths are common in file processing tools
+    - G304
+
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gosec
+        - dupl
+    - path: cmd/
+      linters:
+        - gocyclo
+    - path: internal/backup/
+      linters:
+        - gosec  # File operations are expected in backup package
+    - path: internal/config/
+      linters:
+        - gocyclo  # Config validation naturally has high complexity
+    - path: internal/parser/
+      linters:
+        - gocyclo  # Parsing logic naturally has high complexity
